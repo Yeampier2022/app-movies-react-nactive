@@ -5,11 +5,12 @@ import MoviePoster from "./MoviePoster";
 interface Props {
   movies: Movie[];
   title?: string;
+  classname?: string;
 }
 
-const MovieHorizontalList = ({ movies, title }: Props) => {
+const MovieHorizontalList = ({ movies, title, classname }: Props) => {
   return (
-    <View>
+    <View className={`${classname}`}>
       <Text className="text-3xl font-bold px-4 mb-2">{title}</Text>
       <FlatList
         horizontal
