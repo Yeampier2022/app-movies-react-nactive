@@ -1,3 +1,4 @@
+import MovieHeader from "@/presentation/components/movies/MovieHeader";
 import { usemovieById } from "@/presentation/hooks/usemovieById";
 import { useLocalSearchParams } from "expo-router";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
@@ -7,7 +8,7 @@ const movieId = () => {
 
   const { movieByIdQuery } = usemovieById(+id);
 
-  if (movieByIdQuery.isLoading) {
+  if (movieByIdQuery.isLoading || !movieByIdQuery.data) {
     return (
       <View className="flex-1 justify-center items-center">
         <Text className="mb-4">Espere por favor</Text>
@@ -18,11 +19,11 @@ const movieId = () => {
   }
   return (
     <ScrollView>
-      <Text>{movieByIdQuery.data?.title ?? ""}</Text>
-      <Text>{movieByIdQuery.data?.genres ?? ""}</Text>
-      <Text>{movieByIdQuery.data?.description ?? ""}</Text>
-      <Text>{movieByIdQuery.data?.description ?? ""}</Text>
-
+      <MovieHeader
+        title={movieByIdQuery.data?.title}
+        poster={movieByIdQuery.data?.poster}
+        originalTitle={movieByIdQuery.data?.title}
+      />
     </ScrollView>
   );
 };
